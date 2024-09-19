@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Pacientes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>ADMINISTRADOR</h2>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Registrar paciente</a></li>
+                    <li><a href="list.html" class="active">Pacientes registrados</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <h1>Pacientes Registrados</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Género</th>
+                        <th>Dirección</th>
+                        <th>Edad</th>
+                        <th>Celular</th>
+                        <th>Fecha de Nacimiento</th>
+                    </tr>
+                </thead>
+                <tbody id="Pacientes">
+                    <!-- Aquí se añadirán dinámicamente los datos -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <script>
+        // Llamar a la API de Flask para obtener los pacientes
+        fetch('http://127.0.0.1:5000/pacientes')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('Pacientes');
+                tableBody.innerHTML = '';  // Limpiar el contenido existente
+                data.forEach(paciente => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${paciente.ID}</td>
+                        <td>${paciente.Nombres}</td>
+                        <td>${paciente.Apellidos}</td>
+                        <td>${paciente.Genero}</td>
+                        <td>${paciente.Direccion}</td>
+                        <td>${paciente.Edad}</td>
+                        <td>${paciente.Celular}</td>
+                        <td>${paciente.FechaNacimiento}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

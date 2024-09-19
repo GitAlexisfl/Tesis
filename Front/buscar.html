@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Pacientes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>ADMINISTRADOR</h2>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Registrar paciente</a></li>
+                    <li><a href="list.html" class="active">Pacientes registrados</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <h1>Buscar Paciente</h1>
+
+            <!-- Formulario de búsqueda -->
+            <form id="search-form" action="/pacientes/buscar" method="POST">
+                <input type="text" id="search-input" name="dni" placeholder="Ingrese DNI" required>
+                <button type="submit">Buscar</button>
+            </form>
+            
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Género</th>
+                        <th>Dirección</th>
+                        <th>Edad</th>
+                        <th>Celular</th>
+                        <th>Fecha de Nacimiento</th>
+                    </tr>
+                </thead>
+                <tbody id="Pacientes">
+                    <!-- Aquí se añadirán dinámicamente los datos -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const searchValue = document.getElementById('search-input').value;
+
+    fetch('http://127.0.0.1:5000/pacientes/buscar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `dni=${encodeURIComponent(searchValue)}`
+    })
+    .then(response => {
+        // Verificar si la respuesta es JSON
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            return response.json();
+        } else {
+            throw new Error('La respuesta no es JSON');
+        }
+    })
+    .then(data => {
+        const tableBody = document.getElementById('Pacientes');
+        tableBody.innerHTML = '';
+
+        if (data.error) {
+            tableBody.innerHTML = `<tr><td colspan="8">${data.error}</td></tr>`;
+        } else {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${data.numero}</td>
+                <td>${data.nombres}</td>
+                <td>${data.apellidoPaterno +' '+ data.apellidoMaterno }</td>
+                <td>${data.numeroDocumento}</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+            `;
+            tableBody.appendChild(row);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+    </script>
+</body>
+</html>

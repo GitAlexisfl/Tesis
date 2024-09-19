@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Búsqueda por DNI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Buscar por DNI</h1>
+
+        <form id="search-form" action="/pacientes/buscar" method="POST">
+            <div class="form-group">
+                <label for="dni">Número de DNI:</label>
+                <input type="text" id="dni" name="dni" placeholder="Ingrese el DNI" required>
+            </div>
+            <button type="submit">Buscar</button>
+        </form>
+
+        <table>
+        <div id="results" class="results">
+            <h2>Resultados</h2>
+            <p><strong>Nombres:</strong> <span id="nombres"></span></p>
+            <p><strong>Apellido Paterno:</strong> <span id="apellidoPaterno"></span></p>
+            <p><strong>Apellido Materno:</strong> <span id="apellidoMaterno"></span></p>
+            <p><strong>Tipo de Documento:</strong> <span id="tipoDocumento"></span></p>
+            <p><strong>Número de Documento:</strong> <span id="numeroDocumento"></span></p>
+            <p><strong>Dígito Verificador:</strong> <span id="digitoVerificador"></span></p>
+        </div>
+        <tbody id="Pacientes"></tbody>
+        </tbody>
+        </table>
+    </div>
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const searchValue = document.getElementById('dni').value;
+
+    fetch('http://127.0.0.1:5000/pacientes/buscar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `dni=${encodeURIComponent(searchValue)}`
+    })
+    .then(response => {
+        // Verificar si la respuesta es JSON
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            return response.json();
+        } else {
+            throw new Error('La respuesta no es JSON');
+        }
+    })
+    .then(data => {
+        const tableBody = document.getElementById('Pacientes');
+        tableBody.innerHTML = '';
+
+        if (data.error) {
+            tableBody.innerHTML = `<tr><td colspan="8">${data.error}</td></tr>`;
+        } else {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                
+                <td>${data.nombres}</td>
+                <td>${data.apellidoPaterno}</td>
+                <td>${data.tipoDocumento}</td>
+                <td>${data.numeroDocumento}</td>
+                <td>${data.digitoVerificador}</td>               
+            `;
+            tableBody.appendChild(row);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+    </script>
+</body>
+</html>
