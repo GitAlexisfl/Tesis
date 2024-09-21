@@ -1,0 +1,147 @@
+
+body {
+    background-color: #e9ecef; /* Color de fondo claro */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar-logo {    
+    width: 150px; /* Ajusta el ancho a 150px */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-bottom: 40px; /* Espacio entre la imagen y el menú */
+    border-radius: 5px; /* Opcional: para bordes redondeados */
+    position: relative; /* Habilita el uso de top y left */
+    top: 20px; /* Mueve la imagen hacia abajo */
+    left: 20px; /* Mueve la imagen hacia la derecha */ 
+}
+
+
+.container {
+    display: flex;
+    width: 100%;  
+     
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;    
+}
+
+.sidebar h2 {
+    font-size: 35px;
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 10px 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+    font-weight: 600;
+}
+
+.sidebar a:hover {
+    background-color: #0056b3;
+    border-radius: 8px;
+}
+
+/*.sidebar nav ul li a.active {
+    background-color: #b7e4c7;
+    color: #000;
+}*/
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+.card {
+    border-radius: 1rem;
+}
+
+.card-header {
+    background-color: #007bff; 
+    color: white; 
+    border-top-left-radius: 1rem; 
+    border-top-right-radius: 1rem; 
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border-color: #0056b3; 
+}
+
+.table {
+    margin-top: 20px; 
+}
+
+.text-danger {
+    font-weight: bold; 
+}
+
+.patient-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.patient-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-guardar {
+    background-color: #ccc;
+    width: 140px;
+    height: auto;
+    position: absolute; 
+    top: 90%; 
+    left: 55%; 
+}
+
+.btn-actualizar {
+    background-color: #333;
+    color: white;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}

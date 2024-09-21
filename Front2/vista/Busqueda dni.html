@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policlínico Adrianzén</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/buscar_dni.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <!--<img src="/images/admin.png" alt="Logo" class="sidebar-logo">-->
+        <h2>Panel de Control</h2>
+        <nav>
+            <ul>
+                <li><a href="main.html">Inicio</a></li>
+                <li><a href="modulo_resumen_general.html">Resumen General</a></li>
+                <li><a href="gestion_citas.html">Gestión de Citas</a></li>
+                <li><a href="historial_pacientes.html">Historial de Pacientes</a></li> 
+                <li><a href="modulo_reportes.html">Módulo de Reportes</a></li>
+                <li><a href="index.html">Registrar paciente</a></li>
+                <li><a href="list.html">Pacientes registrados</a></li>
+                <li><a href="Busqueda dni.html" class="active">Buscar datos</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <main>
+            <div class="card shadow">
+                <div class="card-header text-center">
+                    <h2>Buscar por DNI</h2>
+                </div>
+                <div class="card-body">
+                    <form id="search-form" action="/pacientes/buscar" method="POST">
+                        <div class="form-group">
+                            <label for="dni">Número de DNI:</label>
+                            <input type="text" id="dni" name="dni" class="form-control" placeholder="Ingrese el DNI"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Buscar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="results" class="mt-4">
+                <h2 class="text-center">Resultados</h2>
+                <table class="table table-striped table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Nombres</th>
+                            <th>Apellido Paterno</th>
+                            <th>Apellido Materno</th>
+                            <th>Tipo de Documento</th>
+                            <th>Número de Documento</th>
+                            <th>Dígito Verificador</th>
+                        </tr>
+                    </thead>
+                    <tbody id="Pacientes">
+                        <!-- Los resultados se agregarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <div class="buttons">
+        <button type="submit" class="btn-guardar">Guardar</button>
+    </div>
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const searchValue = document.getElementById('dni').value;
+
+            fetch('http://127.0.0.1:5000/pacientes/buscar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `dni=${encodeURIComponent(searchValue)}`
+            })
+                .then(response => {
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        return response.json();
+                    } else {
+                        throw new Error('La respuesta no es JSON');
+                    }
+                })
+                .then(data => {
+                    const tableBody = document.getElementById('Pacientes');
+                    tableBody.innerHTML = '';
+
+                    if (data.error) {
+                        tableBody.innerHTML = `<tr><td colspan="6" class="text-danger">${data.error}</td></tr>`;
+                    } else {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td>${data.nombres}</td>
+                        <td>${data.apellidoPaterno}</td>
+                        <td>${data.apellidoMaterno}</td>
+                        <td>${data.tipoDocumento}</td>
+                        <td>${data.numeroDocumento}</td>
+                        <td>${data.digitoVerificador}</td>
+                    `;
+                        tableBody.appendChild(row);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+</body>
+
+</html>
