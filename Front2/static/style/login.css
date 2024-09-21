@@ -1,0 +1,93 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(rgba(0, 123, 255, 0.6), rgba(255, 255, 255, 0.9));
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+/**
+.name h1 {
+    font-family: "Sofadi One", system-ui;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4rem;
+    color: white;
+    position: absolute;
+    left: 30%;
+    top: 80px;
+    opacity: 0;
+    animation: slideDown 2s ease-out forwards;// Duración de 2 segundos 
+    
+}
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100px); // Inicia fuera de la pantalla 
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0); // Termina en su posición original 
+        opacity: 1;
+    }
+}**/
+
+
+.login-container {
+    background-color:  rgba(252, 251, 251, 0.4); /* Fondo translúcido */
+    padding: 100px;
+    content: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 550px;
+    width: 100%;
+}
+
+
+
+h2 {
+    color: #fdfbfb;
+    font-weight: 600;
+    margin-bottom: 25px;
+    padding: 30px;
+    text-align: center;
+}
+
+.form-label {
+    color: #747272;
+    font-weight: 500;
+}
+
+.form-control {
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: #007BFF;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.forgot-password a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}

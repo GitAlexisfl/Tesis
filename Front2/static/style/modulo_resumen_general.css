@@ -1,0 +1,40 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f9fc;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: #007BFF;
+    padding: 20px;
+    color: white;
+    width: 220px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.sidebar a:hover {
+    background-color: #0056b3;
+    border-radius: 8px;
+}
+
+.main-content {
+    padding: 20px;
+    margin-left: 220px; /* espacio para el sidebar */
+}
+
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card h5 {
+    font-weight: 600;
+}

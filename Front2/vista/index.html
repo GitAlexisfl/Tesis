@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de Pacientes</title>
+    <link rel="stylesheet" href="/style/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <!-- <img src="/images/admin.png" alt="Logo" class="sidebar-logo">-->
+            <h2>Panel de Control</h2>
+            <nav>
+                <ul>
+                    <li><a href="main.html">Inicio</a></li>
+                    <li><a href="modulo_resumen_general.html">Resumen General</a></li>
+                    <li><a href="gestion_citas.html">Gestión de Citas</a></li>
+                    <li><a href="historial_pacientes.html">Historial de Pacientes</a></li>
+                    <li><a href="modulo_reportes.html">Módulo de Reportes</a></li>
+                    <li><a href="index.html" class="active">Registrar paciente</a></li>
+                    <li><a href="list.html">Pacientes registrados</a></li>
+                    <li><a href="Busqueda dni.html">Buscar datos</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <h1>Buscar Paciente</h1>
+            <form id="patient-form" class="patient-form">
+
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" placeholder="Nombres">
+
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos">
+
+                <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
+
+                <label for="celular">Celular:</label>
+                <input type="text" id="celular" name="celular" placeholder="Celular">
+
+                <label for="genero">Género:</label>
+                <input type="text" id="genero" name="genero" placeholder="Masculino/Femenino">
+
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" name="edad" placeholder="Edad">
+
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Dirección">
+
+
+                <div class="buttons">
+                    <button type="submit" class="btn-actualizar">Actualizar</button>
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('patient-form').addEventListener('submit', function (event) {
+                event.preventDefault(); // Evitar que la página se recargue
+
+                // Recoger los datos del formulario
+                const pacienteData = {
+                    Nombres: document.getElementById('nombres').value,
+                    Apellidos: document.getElementById('apellidos').value,
+                    Genero: document.getElementById('genero').value,
+                    Direccion: document.getElementById('direccion').value,
+                    Edad: document.getElementById('edad').value,
+                    Celular: document.getElementById('celular').value,
+                    FechaNacimiento: document.getElementById('fecha-nacimiento').value
+                };
+
+                // Enviar los datos mediante POST a la API
+                fetch('http://localhost:5000/agregar_paciente', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(pacienteData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Paciente agregado exitosamente.");
+                        } else {
+                            alert("Error: " + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
