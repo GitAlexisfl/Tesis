@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!-- Barra lateral -->
     <div class="sidebar">
         <!--<img src="/images/admin.png" alt="Logo" class="sidebar-logo">-->
         <h2>Panel de Control</h2>
@@ -26,6 +27,7 @@
             </ul>
         </nav>
     </div>
+    <!-- Contenido -->
     <div class="container">
         <main>
             <div class="card shadow">
@@ -44,7 +46,43 @@
                 </div>
             </div>
 
-            <div id="results" class="mt-4">
+            <h1>Buscar Paciente</h1>
+            <form id="patient-form" class="patient-form">
+
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" placeholder="Nombres" >
+
+                <label for="apellidoPaterno">Apellido Paterno:</label>
+                <input type="text" id="apellidoPaterno" name="apellidoPaterno" placeholder="apellido Paterno">
+
+                <label for="apellidoMaterno">Apellido Materno:</label>
+                <input type="text" id="apellidoMaterno" name="apellidoMaterno" placeholder="Apellido Materno">
+
+                <label for="numeroDocumento">DNI:</label>
+                <input type="text" id="numeroDocumento" name="numeroDocumento" placeholder="DNI">
+
+                <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
+
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" name="edad" placeholder="Edad">
+
+                <label for="genero">Género:</label>
+                <input type="text" id="genero" name="genero" placeholder="Masculino/Femenino">
+
+                <label for="celular">Celular:</label>
+                <input type="text" id="celular" name="celular" placeholder="Celular">             
+
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Dirección">
+
+                <div class="buttons">
+                    <button type="submit" class="btn-actualizar">Actualizar</button>
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                </div>  
+            </form>
+
+            <!-- <div id="results" class="mt-4">
                 <h2 class="text-center">Resultados</h2>
                 <table class="table table-striped table-bordered mt-3">
                     <thead>
@@ -58,15 +96,18 @@
                         </tr>
                     </thead>
                     <tbody id="Pacientes">
-                        <!-- Los resultados se agregarán aquí dinámicamente -->
+                         Los resultados se agregarán aquí dinámicamente 
                     </tbody>
                 </table>
-            </div>
-        </main>
+            </div> -->
+            
+
+        </main>      
+        
     </div>
-    <div class="buttons">
-        <button type="submit" class="btn-guardar">Guardar</button>
-    </div>
+    
+    <!-- Scripts -->
+
     <script>
         document.getElementById('search-form').addEventListener('submit', function (event) {
             event.preventDefault();
@@ -89,25 +130,75 @@
                     }
                 })
                 .then(data => {
-                    const tableBody = document.getElementById('Pacientes');
-                    tableBody.innerHTML = '';
+                    // console.log(data)
+                    // const tableBody = document.getElementById('Pacientes');
+                    // tableBody.innerHTML = '';
 
                     if (data.error) {
-                        tableBody.innerHTML = `<tr><td colspan="6" class="text-danger">${data.error}</td></tr>`;
+                        console.error(data.error);
                     } else {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                        <td>${data.nombres}</td>
-                        <td>${data.apellidoPaterno}</td>
-                        <td>${data.apellidoMaterno}</td>
-                        <td>${data.tipoDocumento}</td>
-                        <td>${data.numeroDocumento}</td>
-                        <td>${data.digitoVerificador}</td>
-                    `;
-                        tableBody.appendChild(row);
+                        // const row = document.createElement('tr');
+                        // row.innerHTML = `
+                        // <td>${data.nombres}</td>
+                        // <td>${data.apellidoPaterno}</td>
+                        // <td>${data.apellidoMaterno}</td>
+                        // <td>${data.tipoDocumento}</td>
+                        // <td>${data.numeroDocumento}</td>
+                        // <td>${data.digitoVerificador}</td>
+                        // `;
+                        // tableBody.appendChild(row);
+
+
+                        document.getElementById('nombres').value = data.nombres;
+                        document.getElementById('apellidoPaterno').value = data.apellidoPaterno;
+                        document.getElementById('apellidoMaterno').value = data.apellidoMaterno;
+                        document.getElementById('numeroDocumento').value = data.numeroDocumento;
+                        //document.getElementById('tipoDocumento').value = data.tipoDocumento;                        
+                        //document.getElementById('digitoVerificador').value = data.digitoVerificador;
                     }
                 })
                 .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('patient-form').addEventListener('submit', function (event) {
+                event.preventDefault(); // Evitar que la página se recargue
+
+                // Recoger los datos del formulario
+                const pacienteData = {
+                    Nombres: document.getElementById('nombres').value,
+                    ApellidoPaterno: document.getElementById('apellidoPaterno').value,
+                    ApellidoMaterno: document.getElementById('apellidoMaterno').value,
+                    DNI: document.getElementById('numeroDocumento').value,
+                    Genero: document.getElementById('genero').value,
+                    Direccion: document.getElementById('direccion').value,
+                    Edad: document.getElementById('edad').value,
+                    Celular: document.getElementById('celular').value,
+                    FechaNacimiento: document.getElementById('fecha-nacimiento').value
+                };
+
+                // Enviar los datos mediante POST a la API
+                fetch('http://localhost:5000/agregar_paciente', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(pacienteData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Paciente agregado exitosamente.");
+                        } else {
+                            alert("Error: " + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
         });
     </script>
 
