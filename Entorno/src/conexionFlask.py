@@ -35,12 +35,14 @@ def get_pacientes():
             paciente = {
                 'ID': row[0],
                 'Nombres': row[1],
-                'Apellidos': row[2],
-                'Genero': row[3],
-                'Direccion': row[4],
-                'Edad': row[5],
-                'Celular': row[6],
-                'FechaNacimiento': str(row[7])  # Convertir la fecha a string
+                'ApellidoPaterno': row[2],
+                'ApellidoMaterno': row[3],
+                'DNI': row[4],
+                'Genero': row[5],
+                'Direccion': row[6],
+                'Edad': row[7],
+                'Celular': row[8],
+                'FechaNacimiento': str(row[9])  # Convertir la fecha a string
             }
             pacientes.append(paciente)
         return jsonify(pacientes)
@@ -54,7 +56,7 @@ def agregar_paciente():
     data = request.json
 
     # Verificación de que los datos requeridos existen
-    required_fields = ['Nombres', 'Apellidos', 'Genero', 'Direccion', 'Edad', 'Celular', 'FechaNacimiento']
+    required_fields = ['Nombres', 'ApellidoPaterno', 'ApellidoMaterno','DNI','Genero', 'Direccion', 'Edad', 'Celular', 'FechaNacimiento']
     for field in required_fields:
         if field not in data:
             return jsonify({"error": f"Falta el campo requerido: {field}"}), 400
@@ -63,9 +65,9 @@ def agregar_paciente():
         connection = get_db_connection()
         cursor = connection.cursor()
         cursor.execute("""
-            INSERT INTO Pacientes (Nombres, Apellidos, Genero, Direccion, Edad, 
-            Celular, FechaNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (data['Nombres'], data['Apellidos'], data['Genero'], 
+            INSERT INTO Pacientes (Nombres, ApellidoPaterno, ApellidoMaterno, DNI, Genero, Direccion, Edad, 
+            Celular, FechaNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (data['Nombres'], data['ApellidoPaterno'], data['ApellidoMaterno'], data['DNI'],data['Genero'], 
               data['Direccion'], data['Edad'], data['Celular'], 
               data['FechaNacimiento']))
         connection.commit()
