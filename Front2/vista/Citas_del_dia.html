@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas del día</title>
+    <link rel="stylesheet" href="/Front2/static/style/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>PANEL DE CONTROL</h2>
+            <nav>
+                <ul>
+                    <li><a href="main.html">Inicio</a></li>
+                    <li><a href="modulo_resumen_general.html">Resumen General</a></li>
+                    <li><a href="gestion_citas.html">Gestión de Citas</a></li>
+                    <li><a href="historial_pacientes.html">Historial de Pacientes</a></li>
+                    <li><a href="modulo_reportes.html">Módulo de Reportes</a></li>
+                    <li><a href="index.html">Registrar paciente</a></li>
+                    <li><a href="list.html" class="active">Pacientes registrados</a></li>
+                    <li><a href="Busqueda dni.html">Buscar datos</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            <h1>Pacientes Agendados Para el Día</h1>
+
+            <label for="fecha">Seleccionar Fecha:</label>
+            <input type="date" id="fecha" name="fecha" value="">
+            <button id="buscar-citas">Buscar Citas</button>
+
+            <table>
+                <thead>
+                    <tr>
+                       
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Fecha_Cita</th>
+                        <th>Hora_Cita</th>
+                        <th>Descripcion</th>                        
+                    </tr>
+                </thead>
+                <tbody id="Citas">
+                    <!-- Aquí se añadirán dinámicamente los datos -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('buscar-citas').addEventListener('click', function() {
+            const fecha = document.getElementById('fecha').value;
+            const url = `http://127.0.0.1:5000/citas/ver?fecha=${fecha}`;
+
+            // Llamar a la API de Flask para obtener las citas
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('Citas');
+                    tableBody.innerHTML = '';  // Limpiar el contenido existente
+
+                    if (data.length > 0) {
+                        data.forEach(cita => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                               
+                                <td>${cita.Nombre}</td>
+                                <td>${cita.Apellido_Paterno}</td>
+                                <td>${cita.Apellido_Materno}</td>
+                                <td>${cita.Fecha_Cita}</td>
+                                <td>${cita.Hora_Cita}</td>
+                                <td>${cita.Descripcion}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    } else {
+                        tableBody.innerHTML = '<tr><td colspan="7">No hay citas para la fecha seleccionada</td></tr>';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Poner la fecha actual como valor predeterminado
+        window.onload = function() {
+            const today = new Date().toISOString().substr(0, 10);
+            document.getElementById('fecha').value = today;
+        };
+    </script>
+</body>
+
+</html>

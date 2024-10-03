@@ -60,16 +60,16 @@
                 data.forEach(paciente => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${paciente.ID}</td>
-                        <td>${paciente.Nombres}</td>
-                        <td>${paciente.ApellidoPaterno}</td>
-                        <td>${paciente.ApellidoMaterno}</td>
+                        <td>${paciente.ID_Paciente}</td>
+                        <td>${paciente.Nombre}</td>
+                        <td>${paciente.Apellido_Paterno}</td>
+                        <td>${paciente.Apellido_Materno}</td>
                         <td>${paciente.DNI}</td>
                         <td>${paciente.Genero}</td>
                         <td>${paciente.Direccion}</td>
                         <td>${paciente.Edad}</td>
                         <td>${paciente.Celular}</td>
-                        <td>${paciente.FechaNacimiento}</td>
+                        <td>${paciente.Fecha_Nacimiento}</td>
                     `;
                     tableBody.appendChild(row);
                 });
