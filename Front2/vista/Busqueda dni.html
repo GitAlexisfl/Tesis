@@ -49,7 +49,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nombres">Nombres:</label>
-                        <input type="text" id="nombres" name="nombres" placeholder="Nombres">
+                        <input type="text" id="nombre" name="nombres" placeholder="Nombres">
                     </div>
                     <div class="form-group">
                         <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
@@ -165,7 +165,7 @@
                         // tableBody.appendChild(row);
 
 
-                        document.getElementById('nombres').value = data.nombres;
+                        document.getElementById('nombre').value = data.nombres;
                         document.getElementById('apellidoPaterno').value = data.apellidoPaterno;
                         document.getElementById('apellidoMaterno').value = data.apellidoMaterno;
                         document.getElementById('numeroDocumento').value = data.numeroDocumento;
@@ -184,15 +184,15 @@
 
                 // Recoger los datos del formulario
                 const pacienteData = {
-                    Nombres: document.getElementById('nombres').value,
-                    ApellidoPaterno: document.getElementById('apellidoPaterno').value,
-                    ApellidoMaterno: document.getElementById('apellidoMaterno').value,
+                    Nombre: document.getElementById('nombre').value,
+                    Apellido_Paterno: document.getElementById('apellidoPaterno').value,
+                    Apellido_Materno: document.getElementById('apellidoMaterno').value,
                     DNI: document.getElementById('numeroDocumento').value,
                     Genero: document.getElementById('genero').value,
                     Direccion: document.getElementById('direccion').value,
                     Edad: document.getElementById('edad').value,
                     Celular: document.getElementById('celular').value,
-                    FechaNacimiento: document.getElementById('fecha-nacimiento').value
+                    Fecha_Nacimiento: document.getElementById('fecha-nacimiento').value
                 };
 
                 // Enviar los datos mediante POST a la API
