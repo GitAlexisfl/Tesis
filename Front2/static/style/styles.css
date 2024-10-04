@@ -1,54 +1,27 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    height: 100vh;
-}
-
-.sidebar-logo {    
-    width: 150px; 
-    height: auto; 
-    margin-bottom: 40px;
-    border-radius: 5px;
-    position: relative; 
-    top: 20px; 
-    left: 45px;  
-}
-
-.container {
-    display: flex;
-    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f9fc;
 }
 
 .sidebar {
-    width: 250px;
+    height: 100vh;
     background-color: #007BFF;
     padding: 20px;
+    color: white;
+    width: 250px;    
+    position: fixed;
 }
 
-.sidebar h2 {
-    font-size: 30px;
+.sidebar h2{
     text-align: center;
-    color: white;
     margin-bottom: 40px;
-    
 }
 
-.sidebar nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar nav ul li {
-    margin: 10px 0;
-}
-
-.sidebar nav ul li a {
-    text-decoration: none;
+.sidebar a {
     color: white;
-    padding: 10px;
+    text-decoration: none;
     display: block;
+    padding: 15px;
     font-weight: 600;
 }
 
@@ -57,71 +30,103 @@ body {
     border-radius: 8px;
 }
 
-/*.sidebar nav ul li a.active {
-    background-color: #b7e4c7;
-    color: #000;
-}*/
-
-main {
-    flex: 1;
-    padding: 20px;
+.sidebar a.active {
+    background-color: #ffffff; /* Color resaltado para la opción activa */
+    border-radius: 8px;
+    color: #0056b3;
+    font-weight: bold;
 }
 
-main h1 {
-    margin-bottom: 20px;
+/* Estilo para el contenedor principal */
+.main-content {
+    margin-left: 250px; /* Asegúrate de que esto coincida con el ancho del sidebar */
+    padding: 20px; /* Ajusta el padding si es necesario */
+    background-color: #ffffff;
+    width: calc(100% - 250px); /* Toma el espacio restante después del sidebar */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box; /*  padding y border en el tamaño total */
+    min-height: 100vh; /*  ocupa todo el alto disponible */
 }
 
+h1{
+    position: relative;
+    left:190px;
+    margin-bottom: 50px;
+}
+
+/* Estilo del formulario */
+.patient-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo de los labels */
 .patient-form label {
-    display: block;
+    font-weight: bold;
     margin: 10px 0 5px;
+    font-family: 'Poppins', sans-serif;
+    color: #555;
+    position: relative;
+    left:190px;
 }
 
-.patient-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+/* Estilo de los inputs */
+.patient-form input[type="text"],
+.patient-form input[type="date"],
+.patient-form input[type="number"] {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    left:190px;
 }
 
+.patient-form input[type="text"]:focus,
+.patient-form input[type="date"]:focus,
+.patient-form input[type="number"]:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Estilo de los botones */
 .buttons {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 button {
-    padding: 10px 20px;
+    width: 20%; /* Ajustamos el tamaño para ocupar el espacio */
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.btn-actualizar {
-    background-color: #333;
-    color: white;
-    width: 140px;
-    height: auto;
-    position: relative; 
-    top: 20px; 
-    left: 40%; 
-}
 
+
+/* Botón de guardar */
 .btn-guardar {
-    background-color: #ccc;
-    width: 140px;
-    height: auto;
-    position: relative; 
-    top: 20px; 
-    right: 40%; 
+    background-color: #007BFF;
+    color: white;
+    position: relative;
+    left: 40%;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.btn-guardar:hover {
+    background-color: #0056b3;
 }
 
-table th, table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-}
+
+

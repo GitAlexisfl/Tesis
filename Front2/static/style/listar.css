@@ -1,0 +1,125 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f9fc;
+    margin: 0; /* Asegúrate de que no haya márgenes en el cuerpo */
+}
+
+.d-flex {
+    display: flex; /* Utiliza flexbox para que el layout sea más fluido */
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: #007BFF;
+    padding: 20px;
+    color: white;
+    width: 250px;
+    position: fixed; /* sidebar fijo */
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.sidebar a:hover {
+    background-color: #0056b3;
+    border-radius: 8px;
+}
+
+.sidebar a.active {
+    background-color: #ffffff; /* Color resaltado para la opción activa */
+    border-radius: 8px;
+    color: #0056b3;
+    font-weight: bold;
+}
+
+/* Estilo para el contenedor principal */
+.main-content {
+    margin-left: 250px; /* Asegúrate de que esto coincida con el ancho del sidebar */
+    padding: 20px; /* Ajusta el padding si es necesario */
+    background-color: #ffffff;
+    width: calc(100% - 250px); /* Toma el espacio restante después del sidebar */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box; /*  padding y border en el tamaño total */
+    min-height: 100vh; /*  ocupa todo el alto disponible */
+}
+
+/* Elimina márgenes en la tabla */
+table {
+    width: 100%; /* Asegúrate de que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Elimina espacios entre celdas */
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+table tbody tr:hover {
+    background-color: #e9f5ff;
+}
+
+th, td {
+    padding: 10px; /* Espaciado dentro de las celdas */
+    text-align: left; /* Alineación de texto */
+    border-bottom: 1px solid #ddd; /* Línea entre filas */
+}
+
+th {
+    background-color: #007BFF; /* Color de fondo para encabezados de tabla */
+    color: white; /* Color de texto para encabezados */
+}
+
+
+/* Responsivo para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: relative; /* Quitar el fijo en pantallas pequeñas */
+        height: auto;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table, table tbody, table tr, table td {
+        display: block;
+        width: 100%;
+    }
+
+    table tr {
+        margin-bottom: 15px;
+    }
+
+    table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}

@@ -1,6 +1,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f7f9fc;
+    margin: 0;
 }
 
 .sidebar {
@@ -8,7 +9,13 @@ body {
     background-color: #007BFF;
     padding: 20px;
     color: white;
-    width: 220px;
+    width: 250px;
+    position: fixed; /* Asegura que el sidebar permanezca fijo */
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .sidebar a {
@@ -17,6 +24,7 @@ body {
     display: block;
     padding: 15px;
     font-weight: 600;
+    transition: background-color 0.3s; /* Transición suave */
 }
 
 .sidebar a:hover {
@@ -24,17 +32,46 @@ body {
     border-radius: 8px;
 }
 
+.sidebar a.active {
+    background-color: #ffffff; /* Color resaltado para la opción activa */
+    border-radius: 8px;
+    color: #0056b3;
+    font-weight: bold;
+}
+
 .main-content {
     padding: 20px;
-    margin-left: 220px; /* espacio para el sidebar */
+    margin-left: 270px; /* Ajustar espacio para el sidebar */
+    transition: margin-left 0.3s; /* Transición suave para el contenido */
 }
 
 
 .card {
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    width: 300px; /* Fixed width */
+    min-height: 250px; /* Updated minimum height */
+    max-width: 550px; /* Updated maximum width */
+    padding: 120px; /* Internal spacing for content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efecto de elevar la tarjeta */
+    background-color: #89bcc9;
+    color: #f7f9fc;
 }
 
 .card h5 {
     font-weight: 600;
+    margin-bottom: 10px; /* Espacio entre el título y el contenido */
+}
+
+.card p {
+    font-size: 4rem; /* Tamaño de fuente para los números */
+    font-weight: 700; /* Hacer los números más audaces */
+    margin: 0; /* Eliminar márgenes por defecto */
 }

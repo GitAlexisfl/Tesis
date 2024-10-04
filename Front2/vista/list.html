@@ -5,28 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Pacientes</title>
-    <link rel="stylesheet" href="/Front2/static/style/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Front2/static/style/listar.css">
 </head>
 
 <body>
-    <div class="container">
-        <aside class="sidebar">
-           <!--  <img src="/images/admin.png" alt="Logo" class="sidebar-logo">-->
-            <h2>PANEL DE CONTROL</h2>
-            <nav>
-                <ul>
-                    <li><a href="main.html">Inicio</a></li>
-                    <li><a href="modulo_resumen_general.html">Resumen General</a></li>
-                    <li><a href="gestion_citas.html">Gestión de Citas</a></li>
-                    <li><a href="historial_pacientes.html">Historial de Pacientes</a></li>
-                    <li><a href="modulo_reportes.html">Módulo de Reportes</a></li>
-                    <li><a href="index.html">Registrar paciente</a></li>
-                    <li><a href="list.html" class="active">Pacientes registrados</a></li>
-                    <li><a href="Busqueda dni.html">Buscar datos</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <main>
+    <div class="d-flex">
+        <div class="sidebar">
+            <h2>Panel de Control</h2>
+                <a href="main.html">Inicio</a>
+                <a href="modulo_resumen_general.html">Resumen General</a>
+                <a href="gestion_citas.html">Programar Citas</a>            
+                <a href="Citas_del_dia.html">Mostrar Citas</a>
+                <a href="modulo_reportes.html">Módulo de Reportes</a>     
+                <a href="index.html" >Registrar paciente</a>
+                <a href="list.html" class="active">Historial de Pacientes</a>
+                <a href="Busqueda dni.html">Buscar datos</a>
+        </div>
+
+        <div class="main-content">
             <h1>Pacientes Registrados</h1>
             <table>
                 <thead>
@@ -45,9 +42,71 @@
                 </thead>
                 <tbody id="Pacientes">
                     <!-- Aquí se añadirán dinámicamente los datos -->
+                    <tr>
+                        <td>1</td>
+                        <td>Juan</td>
+                        <td>Pérez</td>
+                        <td>González</td>
+                        <td>12345678</td>
+                        <td>Masculino</td>
+                        <td>Av. Siempre Viva 123</td>
+                        <td>30</td>
+                        <td>987654321</td>
+                        <td>1994-05-01</td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>María</td>
+                        <td>López</td>
+                        <td>Martínez</td>
+                        <td>87654321</td>
+                        <td>Femenino</td>
+                        <td>Calle Falsa 456</td>
+                        <td>25</td>
+                        <td>912345678</td>
+                        <td>1999-08-15</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Carlos</td>
+                        <td>Rodríguez</td>
+                        <td>Morales</td>
+                        <td>23456789</td>
+                        <td>Masculino</td>
+                        <td>Calle Verdadera 789</td>
+                        <td>40</td>
+                        <td>945678123</td>
+                        <td>1983-11-10</td>
+                    </tr>
+                    <tr></tr>
+                        <td>4</td>
+                        <td>María</td>
+                        <td>López</td>
+                        <td>Martínez</td>
+                        <td>87654321</td>
+                        <td>Femenino</td>
+                        <td>Calle Falsa 456</td>
+                        <td>25</td>
+                        <td>912345678</td>
+                        <td>1999-08-15</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Carlos</td>
+                        <td>Rodríguez</td>
+                        <td>Morales</td>
+                        <td>23456789</td>
+                        <td>Masculino</td>
+                        <td>Calle Verdadera 789</td>
+                        <td>40</td>
+                        <td>945678123</td>
+                        <td>1983-11-10</td>
+                    </tr>
+                    
                 </tbody>
             </table>
-        </main>
+        </div>        
     </div>
 
     <script>
@@ -60,16 +119,16 @@
                 data.forEach(paciente => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${paciente.ID_Paciente}</td>
-                        <td>${paciente.Nombre}</td>
-                        <td>${paciente.Apellido_Paterno}</td>
-                        <td>${paciente.Apellido_Materno}</td>
+                        <td>${paciente.ID}</td>
+                        <td>${paciente.Nombres}</td>
+                        <td>${paciente.ApellidoPaterno}</td>
+                        <td>${paciente.ApellidoMaterno}</td>
                         <td>${paciente.DNI}</td>
                         <td>${paciente.Genero}</td>
                         <td>${paciente.Direccion}</td>
                         <td>${paciente.Edad}</td>
                         <td>${paciente.Celular}</td>
-                        <td>${paciente.Fecha_Nacimiento}</td>
+                        <td>${paciente.FechaNacimiento}</td>
                     `;
                     tableBody.appendChild(row);
                 });
