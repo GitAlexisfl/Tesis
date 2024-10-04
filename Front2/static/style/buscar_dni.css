@@ -19,14 +19,15 @@ body {
 }
 
 .main-content {
+    position: absolute; 
     margin-left: 250px; /* Asegúrate de que esto coincida con el ancho del sidebar */
     padding: 20px; /* Ajusta el padding si es necesario */
     background-color: #ffffff;
     width: calc(100% - 250px); /* Toma el espacio restante después del sidebar */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    box-sizing: border-box; /*  padding y border en el tamaño total */
-    min-height: 100vh; /*  ocupa todo el alto disponible */
+    box-sizing: border-box; /* padding y border en el tamaño total */
+    min-height: 100vh; /* ocupa todo el alto disponible */
 }
 
 .container {
@@ -195,7 +196,7 @@ button {
     font-weight: bold;
     position: absolute; 
     top: auto; 
-    left: 45%; 
+    left: 35%; 
 }
 
 .btn-actualizar:hover {
@@ -214,3 +215,23 @@ table th, table td {
     text-align: left;
 }
 
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* El sidebar ocupa todo el ancho */
+        position: relative; /* Permite que se desplace con el contenido */
+        height: auto; /* Ajusta la altura automáticamente */
+    }
+    
+    .main-content {
+        margin-left: 0; /* Elimina el margen izquierdo en pantallas pequeñas */
+        width: 100%; /* Asegura que el contenido principal ocupe todo el ancho */
+        padding: 10px; /* Ajusta el padding si es necesario para pantallas más pequeñas */
+    }
+
+    .buttons {
+        width: 100%; /* Los botones ocupan todo el ancho */
+        left: 0; /* Elimina el desplazamiento */
+        margin-bottom: 10px; /* Espacio entre botones */
+    }
+}

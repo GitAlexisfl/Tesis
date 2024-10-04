@@ -1,4 +1,3 @@
-
 body {
     background-color: #e9ecef; /* Color de fondo claro */
     font-family: Arial, sans-serif;
@@ -8,14 +7,14 @@ body {
     height: 100vh;
 }
 
-.sidebar-logo {    
+.sidebar-logo {
     width: 150px; /* Ajusta el ancho a 150px */
     height: auto; /* Mantiene la proporción de la imagen */
     margin-bottom: 40px; /* Espacio entre la imagen y el menú */
     border-radius: 5px; /* Opcional: para bordes redondeados */
     position: relative; /* Habilita el uso de top y left */
     top: 20px; /* Mueve la imagen hacia abajo */
-    left: 20px; /* Mueve la imagen hacia la derecha */ 
+    left: 20px; /* Mueve la imagen hacia la derecha */
 }
 
 .sidebar a.active {
@@ -27,20 +26,21 @@ body {
 
 .container {
     display: flex;
-    width: 100%;  
+    width: 100%;
     position: relative;
-    right: 150px;
+    flex-direction: row;
 }
 
 .main-content {
+    position: absolute; 
     margin-left: 250px; /* Asegúrate de que esto coincida con el ancho del sidebar */
     padding: 20px; /* Ajusta el padding si es necesario */
     background-color: #ffffff;
     width: calc(100% - 250px); /* Toma el espacio restante después del sidebar */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    box-sizing: border-box; /*  padding y border en el tamaño total */
-    min-height: 100vh; /*  ocupa todo el alto disponible */
+    box-sizing: border-box; /* padding y border en el tamaño total */
+    min-height: 100vh; /* ocupa todo el alto disponible */
 }
 
 .sidebar {
@@ -71,32 +71,18 @@ body {
     border-radius: 8px;
 }
 
-/*.sidebar nav ul li a.active {
-    background-color: #b7e4c7;
-    color: #000;
-}*/
-
 main {
     flex: 1;
     padding: 20px;
 }
 
-h1{
+h1 {
     margin-bottom: 10px;
 }
 
-.patient-form{
+.patient-form {
     margin-top: 50px;
 }
-
-/*.patient-form {
-    background-color: #ffffff;
-    padding: 90px;
-    height: 100%;
-    width: 119%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}*/
 
 .buttons {
     display: flex;
@@ -116,20 +102,17 @@ button {
     padding: 10px 20px; /* Ajusta el espacio interno del botón */
     font-size: 16px; /* Cambia el tamaño de la fuente */
     width: 20%; /* Para que el botón ocupe todo el ancho del contenedor */
-    /* O puedes definir un ancho fijo si no quieres que ocupe todo el espacio */
-    /* width: 200px; */
     position: relative;
     left: 40%;
 }
 
-
 .btn-agendar {
-    background-color: #333;   
-    color: white; 
+    background-color: #333;
+    color: white;
     font-weight: bold;
-    position: absolute; 
-    top: auto; 
-    left: 50%; 
+    position: absolute;
+    top: auto;
+    left: 50%;
 }
 
 .btn-agendar:hover {
@@ -137,14 +120,13 @@ button {
     color: rgb(43, 42, 42);
 }
 
-
 .btn-actualizar {
     background-color: #333;
     color: white;
     font-weight: bold;
-    position: absolute; 
-    top: auto; 
-    left: 45%; 
+    position: absolute;
+    top: auto;
+    left: 45%;
 }
 
 .btn-actualizar:hover {
@@ -163,3 +145,23 @@ table th, table td {
     text-align: left;
 }
 
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* El sidebar ocupa todo el ancho */
+        position: relative; /* Permite que se desplace con el contenido */
+        height: auto; /* Ajusta la altura automáticamente */
+    }
+    
+    .main-content {
+        margin-left: 0; /* Elimina el margen izquierdo en pantallas pequeñas */
+        width: 100%; /* Asegura que el contenido principal ocupe todo el ancho */
+        padding: 10px; /* Ajusta el padding si es necesario para pantallas más pequeñas */
+    }
+
+    .btn {
+        width: 100%; /* Los botones ocupan todo el ancho */
+        left: 0; /* Elimina el desplazamiento */
+        margin-bottom: 10px; /* Espacio entre botones */
+    }
+}
