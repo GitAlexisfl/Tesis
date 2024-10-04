@@ -82,17 +82,21 @@ main {
 }
 
 h1{
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
-.patient-form {
+.patient-form{
+    margin-top: 50px;
+}
+
+/*.patient-form {
     background-color: #ffffff;
     padding: 90px;
     height: 100%;
     width: 119%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+}*/
 
 .buttons {
     display: flex;
