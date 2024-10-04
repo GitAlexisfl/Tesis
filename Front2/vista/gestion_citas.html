@@ -1,35 +1,208 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Citas - Policlínico</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/Front2/static/style/citas.css" rel="stylesheet">
+    <title>Policlínico Adrianzén</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Front2/static/style/programar_citas.css">
 </head>
+
 <body>
-
-<div class="d-flex">
-    <div class="sidebar">
-        <h2>Panel de Control</h2>
-        <a href="main.html">Inicio</a>
-        <a href="modulo_resumen_general.html">Resumen General</a>
-        <a href="historial_pacientes.html">Historial de Pacientes</a>
-        <a href="modulo_reportes.html">Módulo de Reportes</a>
-        <a href="index.html" class="active">Registrar paciente</a>
-        <a href="list.html">Pacientes registrados</a>
-        <a href="Busqueda dni.html">Buscar datos</a>
-    </div>
-
-    <div class="main-content">
-        <h1 class="mb-4">Gestión de Citas</h1>
-        <div class="card p-3 mb-4">
-            <h5>Calendario y Asignación de Consultas</h5>
-            <p class="text-muted">Aquí se integrará un calendario interactivo.</p>
+    <!-- Barra lateral -->
+    <div class="d-flex">
+        <div class="sidebar">
+            <h2>Panel de Control</h2>
+            <a href="main.html">Inicio</a>
+            <a href="modulo_resumen_general.html">Resumen General</a>
+            <a href="gestion_citas.html" class="active">Programar Citas</a>
+            <a href="Citas_del_dia.html">Mostrar Citas</a>
+            <a href="modulo_reportes.html">Módulo de Reportes</a>
+            <a href="index.html">Registrar paciente</a>
+            <a href="list.html">Historial de Pacientes</a>
+            <a href="Busqueda dni.html">Buscar datos</a>
         </div>
     </div>
-</div>
+<div class="main-content">
+    <div class="container">
+        <main>
+            <!--<div class="card shadow">
+                <div class="card-header text-center">
+                    <h2>Buscar por DNI</h2>
+                </div>
+                <div class="card-body">
+                    <form id="search-form" action="/pacientes/buscarBD" method="POST">
+                        <div class="form-group">
+                            <label for="dni">Número de DNI:</label>
+                            <input type="text" id="dni" name="dni" class="form-control" placeholder="Ingrese el DNI" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Buscar</button>
+                    </form>
+                </div>
+            </div>-->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            
+            <form id="patient-form" class="patient-form">
+                <h1>Agendar Cita</h1>
+                <div class="row">
+                    <!-- Primera columna -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nombres">Nombres:</label>
+                            <input type="text" id="nombres" name="nombres" class="form-control" placeholder="Nombres">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apellidoPaterno">Apellido Paterno:</label>
+                            <input type="text" id="apellidoPaterno" name="apellidoPaterno" class="form-control"
+                                placeholder="Apellido Paterno">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apellidoMaterno">Apellido Materno:</label>
+                            <input type="text" id="apellidoMaterno" name="apellidoMaterno" class="form-control"
+                                placeholder="Apellido Materno">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numeroDocumento">DNI:</label>
+                            <input type="text" id="numeroDocumento" name="numeroDocumento" class="form-control"
+                                placeholder="DNI">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+                            <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edad">Edad:</label>
+                            <input type="number" id="edad" name="edad" class="form-control" placeholder="Edad">
+                        </div>
+                    </div>
+
+                    <!-- Segunda columna -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="genero">Género:</label>
+                            <input type="text" id="genero" name="genero" class="form-control"
+                                placeholder="Masculino/Femenino">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="celular">Celular:</label>
+                            <input type="text" id="celular" name="celular" class="form-control" placeholder="Celular">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="direccion">Dirección:</label>
+                            <input type="text" id="direccion" name="direccion" class="form-control"
+                                placeholder="Dirección">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fechaCita">Fecha de la Cita:</label>
+                            <input type="date" id="fechaCita" name="fechaCita" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="horaCita">Hora de la Cita:</label>
+                            <input type="time" id="horaCita" name="horaCita" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descripcion">Descripción:</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control"
+                                placeholder="Motivo de la cita"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons text-center">
+                    <button type="submit" class="btn btn-primary">Agendar</button>
+                </div>
+            </form>
+
+        </main>
+    </div> </div>
+
+    <!-- Scripts -->
+
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const searchValue = document.getElementById('dni').value;
+
+            fetch('http://127.0.0.1:5000/pacientes/buscarBD', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `dni=${encodeURIComponent(searchValue)}`
+            })
+                .then(response => {
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        return response.json();
+                    } else {
+                        throw new Error('La respuesta no es JSON');
+                    }
+                })
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                    } else {
+                        document.getElementById('nombres').value = data.Nombre;
+                        document.getElementById('apellidoPaterno').value = data.Apellido_Paterno;
+                        document.getElementById('apellidoMaterno').value = data.Apellido_Materno;
+                        document.getElementById('numeroDocumento').value = data.DNI;
+                        document.getElementById('fecha-nacimiento').value = data.Fecha_Nacimiento;
+                        document.getElementById('genero').value = data.Genero;
+                        document.getElementById('direccion').value = data.Direccion;
+                        document.getElementById('edad').value = data.Edad;
+                        document.getElementById('celular').value = data.Celular;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('patient-form').addEventListener('submit', function (event) {
+                event.preventDefault(); // Evitar que la página se recargue
+
+                // Recoger los datos del formulario
+                const citaData = {
+                    DNI: document.getElementById('numeroDocumento').value,
+                    Fecha_Cita: document.getElementById('fechaCita').value,
+                    Hora_Cita: document.getElementById('horaCita').value,
+                    Descripcion: document.getElementById('descripcion').value
+                };
+
+                // Enviar los datos mediante POST a la API para agendar la cita
+                fetch('http://localhost:5000/citas/agendar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(citaData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Cita agendada exitosamente.");
+                        } else {
+                            alert("Error: " + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    </script>
+
 </body>
+
 </html>

@@ -1,6 +1,46 @@
+
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f7f9fc;
+    background-color: #e9ecef; /* Color de fondo claro */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar-logo {    
+    width: 150px; /* Ajusta el ancho a 150px */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-bottom: 40px; /* Espacio entre la imagen y el menú */
+    border-radius: 5px; /* Opcional: para bordes redondeados */
+    position: relative; /* Habilita el uso de top y left */
+    top: 20px; /* Mueve la imagen hacia abajo */
+    left: 20px; /* Mueve la imagen hacia la derecha */ 
+}
+
+.main-content {
+    margin-left: 250px; /* Asegúrate de que esto coincida con el ancho del sidebar */
+    padding: 20px; /* Ajusta el padding si es necesario */
+    background-color: #ffffff;
+    width: calc(100% - 250px); /* Toma el espacio restante después del sidebar */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box; /*  padding y border en el tamaño total */
+    min-height: 100vh; /*  ocupa todo el alto disponible */
+}
+
+
+.container {
+    display: flex;
+    width: 100%;  
+     
+}
+
+.sidebar a.active {
+    background-color: #ffffff; /* Color resaltado para la opción activa */
+    border-radius: 8px;
+    color: #0056b3;
+    font-weight: bold;
 }
 
 .sidebar {
@@ -8,7 +48,13 @@ body {
     background-color: #007BFF;
     padding: 20px;
     color: white;
-    width: 220px;
+    width: 250px;
+    position: fixed; /* Asegura que el sidebar permanezca fijo */
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .sidebar a {
@@ -17,6 +63,7 @@ body {
     display: block;
     padding: 15px;
     font-weight: 600;
+    transition: background-color 0.3s; /* Transición suave */
 }
 
 .sidebar a:hover {
@@ -24,13 +71,66 @@ body {
     border-radius: 8px;
 }
 
-.main-content {
+/*.sidebar nav ul li a.active {
+    background-color: #b7e4c7;
+    color: #000;
+}*/
+
+main {
+    flex: 1;
     padding: 20px;
-    margin-left: 220px; /* espacio para el sidebar */
 }
 
 
-.card {
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+label {
+    display: block; /* Para que las etiquetas se alineen bien */
+    margin-bottom: 5px; /* Espaciado entre la etiqueta y el campo */
 }
+
+input {
+    width: 100%; /* Para que el input ocupe todo el ancho disponible */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+button {
+    width: 20%; /* Ocupa todo el ancho del contenedor */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #045381; /* Color verde para el botón */
+    color: white; /* Color del texto */
+    font-size: 16px; /* Tamaño de fuente */
+    position: relative;
+    left: 40%; /* Sin desplazamiento */
+    margin-top: 15px; /* Espacio superior */
+    margin-bottom: 15px; /* Espacio inferior */
+}
+
+button:hover {
+    background-color: #fafafa;
+    color: #045381;
+    font-weight: bold;
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 1200px; /* Limitar el ancho del contenedor */
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco para el contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */    
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+

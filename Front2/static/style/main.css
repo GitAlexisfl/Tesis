@@ -30,6 +30,18 @@ body {
     border-radius: 8px;
 }
 
+.sidebar a.active {
+    background-color: #ffffff; /* Color resaltado para la opción activa */
+    border-radius: 8px;
+    color: #0056b3;
+    font-weight: bold;
+}
+
+/*.sidebar nav ul li a.active {
+    background-color: #b7e4c7;
+    color: #000;
+}*/
+
 .main-content {
     padding: 20px;
     margin-left: 220px; /* espacio para el sidebar */

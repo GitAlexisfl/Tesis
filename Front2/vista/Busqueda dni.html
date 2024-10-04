@@ -4,30 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Paciente</title>
+    <title>Policlínico Adrianzén</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Front2/static/style/buscar_dni.css">
 </head>
 
 <body>
     <!-- Barra lateral -->
-    <div class="sidebar">
-        <!--<img src="/images/admin.png" alt="Logo" class="sidebar-logo">-->
-        <h2>Panel de Control</h2>
-        <nav>
-            <ul>
-                <li><a href="main.html">Inicio</a></li>
-                <li><a href="modulo_resumen_general.html">Resumen General</a></li>
-                <li><a href="gestion_citas.html">Gestión de Citas</a></li>
-                <li><a href="historial_pacientes.html">Historial de Pacientes</a></li> 
-                <li><a href="modulo_reportes.html">Módulo de Reportes</a></li>
-                <li><a href="index.html">Registrar paciente</a></li>
-                <li><a href="list.html">Pacientes registrados</a></li>
-                <li><a href="Busqueda dni.html" class="active">Buscar datos</a></li>
-            </ul>
-        </nav>
+    <div class="d-flex">
+        <div class="sidebar">
+            <h2>Panel de Control</h2>
+                <a href="main.html">Inicio</a>
+                <a href="modulo_resumen_general.html">Resumen General</a>
+                <a href="gestion_citas.html">Programar Citas</a>            
+                <a href="Citas_del_dia.html">Mostrar Citas</a>
+                <a href="modulo_reportes.html">Módulo de Reportes</a>     
+                <a href="index.html">Registrar paciente</a>
+                <a href="list.html">Historial de Pacientes</a>
+                <a href="Busqueda dni.html" class="active">Buscar datos</a>
+        </div>
     </div>
     <!-- Contenido -->
+     <div class="main-content">
     <div class="container">
         <main>
             <div class="card shadow">
@@ -46,41 +44,59 @@
                 </div>
             </div>
 
-            <h1>Buscar Paciente</h1>
+            <!--<h1>Buscar Paciente</h1>-->
             <form id="patient-form" class="patient-form">
-
-                <label for="nombre">Nombres:</label>
-                <input type="text" id="nombres" name="nombres" placeholder="Nombres" >
-
-                <label for="apellidoPaterno">Apellido Paterno:</label>
-                <input type="text" id="apellidoPaterno" name="apellidoPaterno" placeholder="apellido Paterno">
-
-                <label for="apellidoMaterno">Apellido Materno:</label>
-                <input type="text" id="apellidoMaterno" name="apellidoMaterno" placeholder="Apellido Materno">
-
-                <label for="numeroDocumento">DNI:</label>
-                <input type="text" id="numeroDocumento" name="numeroDocumento" placeholder="DNI">
-
-                <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
-
-                <label for="edad">Edad:</label>
-                <input type="number" id="edad" name="edad" placeholder="Edad">
-
-                <label for="genero">Género:</label>
-                <input type="text" id="genero" name="genero" placeholder="Masculino/Femenino">
-
-                <label for="celular">Celular:</label>
-                <input type="text" id="celular" name="celular" placeholder="Celular">             
-
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" placeholder="Dirección">
-
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombres">Nombres:</label>
+                        <input type="text" id="nombres" name="nombres" placeholder="Nombres">
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+                        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="apellidoPaterno">Apellido Paterno:</label>
+                        <input type="text" id="apellidoPaterno" name="apellidoPaterno" placeholder="Apellido Paterno">
+                    </div>
+                    <div class="form-group">
+                        <label for="edad">Edad:</label>
+                        <input type="number" id="edad" name="edad" placeholder="Edad">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="apellidoMaterno">Apellido Materno:</label>
+                        <input type="text" id="apellidoMaterno" name="apellidoMaterno" placeholder="Apellido Materno">
+                    </div>
+                    <div class="form-group">
+                        <label for="genero">Género:</label>
+                        <input type="text" id="genero" name="genero" placeholder="Masculino/Femenino">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="numeroDocumento">DNI:</label>
+                        <input type="text" id="numeroDocumento" name="numeroDocumento" placeholder="DNI">
+                    </div>
+                    <div class="form-group">
+                        <label for="celular">Celular:</label>
+                        <input type="text" id="celular" name="celular" placeholder="Celular">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Dirección">
+                </div>
+                
                 <div class="buttons">
                     <button type="submit" class="btn-actualizar">Actualizar</button>
                     <button type="submit" class="btn-guardar">Guardar</button>
-                </div>  
+                </div>
             </form>
+            
 
             <!-- <div id="results" class="mt-4">
                 <h2 class="text-center">Resultados</h2>
@@ -104,7 +120,7 @@
 
         </main>      
         
-    </div>
+    </div></div>
     
     <!-- Scripts -->
 
@@ -168,15 +184,15 @@
 
                 // Recoger los datos del formulario
                 const pacienteData = {
-                    Nombre: document.getElementById('nombres').value,
-                    Apellido_Paterno: document.getElementById('apellidoPaterno').value,
-                    Apellido_Materno: document.getElementById('apellidoMaterno').value,
+                    Nombres: document.getElementById('nombres').value,
+                    ApellidoPaterno: document.getElementById('apellidoPaterno').value,
+                    ApellidoMaterno: document.getElementById('apellidoMaterno').value,
                     DNI: document.getElementById('numeroDocumento').value,
                     Genero: document.getElementById('genero').value,
                     Direccion: document.getElementById('direccion').value,
                     Edad: document.getElementById('edad').value,
                     Celular: document.getElementById('celular').value,
-                    Fecha_Nacimiento: document.getElementById('fecha-nacimiento').value
+                    FechaNacimiento: document.getElementById('fecha-nacimiento').value
                 };
 
                 // Enviar los datos mediante POST a la API

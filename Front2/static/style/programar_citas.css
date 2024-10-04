@@ -18,6 +18,20 @@ body {
     left: 20px; /* Mueve la imagen hacia la derecha */ 
 }
 
+.sidebar a.active {
+    background-color: #ffffff; /* Color resaltado para la opción activa */
+    border-radius: 8px;
+    color: #0056b3;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    width: 100%;  
+    position: relative;
+    right: 150px;
+}
+
 .main-content {
     margin-left: 250px; /* Asegúrate de que esto coincida con el ancho del sidebar */
     padding: 20px; /* Ajusta el padding si es necesario */
@@ -27,12 +41,6 @@ body {
     border-radius: 8px;
     box-sizing: border-box; /*  padding y border en el tamaño total */
     min-height: 100vh; /*  ocupa todo el alto disponible */
-}
-
-.container {
-    display: flex;
-    width: 100%;  
-     
 }
 
 .sidebar {
@@ -63,13 +71,6 @@ body {
     border-radius: 8px;
 }
 
-.sidebar a.active {
-    background-color: #ffffff; /* Color resaltado para la opción activa */
-    border-radius: 8px;
-    color: #0056b3;
-    font-weight: bold;
-}
-
 /*.sidebar nav ul li a.active {
     background-color: #b7e4c7;
     color: #000;
@@ -80,76 +81,19 @@ main {
     padding: 20px;
 }
 
-.card {
-    border-radius: 1rem;
-    margin-bottom: 30px;    
-}
-
-.card-header {
-    background-color: #007bff; 
-    color: white; 
-    border-top-left-radius: 1rem; 
-    border-top-right-radius: 1rem; 
-}
-
-.btn-primary {
-    background-color: #0056b3;
-    border-color: #0056b3; 
-}
-
-.table {
-    margin-top: 20px; 
-}
-
-.text-danger {
-    font-weight: bold; 
-}
-
-.patient-form label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-.patient-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+h1{
+    margin-bottom: 50px;
 }
 
 .patient-form {
-    display: flex;
-    flex-direction: column; /* Orientar el formulario verticalmente */
+    background-color: #ffffff;
+    padding: 90px;
+    height: 100%;
+    width: 119%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-row {
-    display: flex; /* Mostrar los elementos de la fila en línea */
-    justify-content: space-between; /* Espaciado entre columnas */
-    margin-bottom: 10px; /* Espacio entre filas */
-   
-}
-
-.form-group {
-    flex: 1; /* Permitir que las columnas ocupen espacio igual */
-    margin-right: 50px; /* Espacio entre columnas */
-}
-
-.form-group:last-child {
-    margin-right: 0; /* Eliminar margen en el último grupo */
-}
-
-label {
-    display: block; /* Para que las etiquetas se alineen bien */
-    margin-bottom: 5px; /* Espaciado entre la etiqueta y el campo */
-}
-
-input {
-    width: 100%; /* Para que el input ocupe todo el ancho disponible */
-    padding: 10px; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde */
-    border-radius: 5px; /* Bordes redondeados */
-}
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -157,6 +101,7 @@ input {
 }
 
 button {
+    margin-top: 50px;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -174,16 +119,16 @@ button {
 }
 
 
-.btn-guardar {
+.btn-agendar {
     background-color: #333;   
     color: white; 
     font-weight: bold;
     position: absolute; 
     top: auto; 
-    left: 55%; 
+    left: 50%; 
 }
 
-.btn-guardar:hover {
+.btn-agendar:hover {
     background-color: #ccc;
     color: rgb(43, 42, 42);
 }

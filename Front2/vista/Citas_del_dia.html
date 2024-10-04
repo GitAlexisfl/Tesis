@@ -5,29 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Citas del día</title>
-    <link rel="stylesheet" href="/Front2/static/style/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Front2/static/style/citas.css">
 </head>
 
-<body>
-    <div class="container">
-        <aside class="sidebar">
-            <h2>PANEL DE CONTROL</h2>
-            <nav>
-                <ul>
-                    <li><a href="main.html">Inicio</a></li>
-                    <li><a href="modulo_resumen_general.html">Resumen General</a></li>
-                    <li><a href="gestion_citas.html">Gestión de Citas</a></li>
-                    <li><a href="historial_pacientes.html">Historial de Pacientes</a></li>
-                    <li><a href="modulo_reportes.html">Módulo de Reportes</a></li>
-                    <li><a href="index.html">Registrar paciente</a></li>
-                    <li><a href="list.html" class="active">Pacientes registrados</a></li>
-                    <li><a href="Busqueda dni.html">Buscar datos</a></li>
-                </ul>
-            </nav>
-        </aside>
 
+<body>
+    <!-- Barra lateral -->
+    <div class="d-flex">
+        <div class="sidebar">
+            <h2>Panel de Control</h2>
+                <a href="main.html">Inicio</a>
+                <a href="modulo_resumen_general.html">Resumen General</a>
+                <a href="gestion_citas.html">Programar Citas</a>            
+                <a href="Citas_del_dia.html" class="active">Mostrar Citas</a>
+                <a href="modulo_reportes.html">Módulo de Reportes</a>     
+                <a href="index.html" >Registrar paciente</a>
+                <a href="list.html">Historial de Pacientes</a>
+                <a href="Busqueda dni.html">Buscar datos</a>
+        </div>
+    </div>
+    <!-- Contenido -->
+     <div class="main-content">
+    <div class="container">
         <main>
-            <h1>Pacientes Agendados Para el Día</h1>
+            <h1>Citas Agendadas</h1>
 
             <label for="fecha">Seleccionar Fecha:</label>
             <input type="date" id="fecha" name="fecha" value="">
@@ -35,8 +37,7 @@
 
             <table>
                 <thead>
-                    <tr>
-                       
+                    <tr>                       
                         <th>Nombre</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
@@ -46,12 +47,45 @@
                     </tr>
                 </thead>
                 <tbody id="Citas">
-                    <!-- Aquí se añadirán dinámicamente los datos -->
+                    <!-- Aquí se añadirán dinámicamente los datos -->                    
+                    <tr>
+                        <td>Juan</td>
+                        <td>Pérez</td>
+                        <td>González</td>
+                        <td>12/03/2024</td>
+                        <td>7:30</td>
+                        <td>Siempre Viva </td>
+                    </tr> 
+                    <tr>
+                        <td>Juan</td>
+                        <td>Pérez</td>
+                        <td>González</td>
+                        <td>12/03/2024</td>
+                        <td>7:30</td>
+                        <td>Siempre Viva </td>
+                    </tr> 
+                    <tr>
+                        <td>Juan</td>
+                        <td>Pérez</td>
+                        <td>González</td>
+                        <td>12/03/2024</td>
+                        <td>7:30</td>
+                        <td>Siempre Viva </td>
+                    </tr> 
+                    <tr>
+                        <td>Juan</td>
+                        <td>Pérez</td>
+                        <td>González</td>
+                        <td>12/03/2024</td>
+                        <td>7:30</td>
+                        <td>Siempre Viva </td>
+                    </tr> 
                 </tbody>
             </table>
-        </main>
-    </div>
+        </main>        
+    </div>    </div>
 
+    <!-- Scripts -->   
     <script>
         document.getElementById('buscar-citas').addEventListener('click', function() {
             const fecha = document.getElementById('fecha').value;
@@ -91,6 +125,7 @@
             document.getElementById('fecha').value = today;
         };
     </script>
+
 </body>
 
 </html>
