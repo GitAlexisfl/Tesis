@@ -19,6 +19,7 @@ body {
 }
 
 .main-content {
+    position: absolute; 
     margin-left: 250px; /* Asegúrate de que esto coincida con el ancho del sidebar */
     padding: 20px; /* Ajusta el padding si es necesario */
     background-color: #ffffff;
