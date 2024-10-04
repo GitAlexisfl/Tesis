@@ -8,16 +8,6 @@ body {
     height: 100vh;
 }
 
-.sidebar-logo {    
-    width: 150px; /* Ajusta el ancho a 150px */
-    height: auto; /* Mantiene la proporción de la imagen */
-    margin-bottom: 40px; /* Espacio entre la imagen y el menú */
-    border-radius: 5px; /* Opcional: para bordes redondeados */
-    position: relative; /* Habilita el uso de top y left */
-    top: 20px; /* Mueve la imagen hacia abajo */
-    left: 20px; /* Mueve la imagen hacia la derecha */ 
-}
-
 
 .container {
     display: flex;
