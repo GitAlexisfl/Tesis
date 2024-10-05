@@ -134,3 +134,46 @@ def buscar_paciente_bd():
                 return jsonify({'error': 'Paciente no encontrado'}), 404
         else:
             return jsonify({"error": "Conexión fallida"}), 500
+        
+@appP.route('/pacientes/buscarND', methods=['POST'])
+def buscar_paciente_nd():
+    busqueda = request.json.get('busqueda')  # Obtener lo que el usuario ingresó
+
+    connection = get_db_connection()
+    if connection:
+        cursor = connection.cursor()
+
+        # Puedes usar ese valor para buscar en DNI, nombre, apellido paterno o apellido materno
+        query = "SELECT * FROM Pacientes WHERE DNI = ? OR Nombre LIKE ? OR Apellido_Paterno LIKE ? OR Apellido_Materno LIKE ?"
+        params = [busqueda, f'%{busqueda}%', f'%{busqueda}%', f'%{busqueda}%']
+
+        # Si no se proporcionó ningún campo, devolver un error
+        if not params:
+            return jsonify({"error": "Debes proporcionar DNI, Nombre, Apellido Paterno o Apellido Materno"}), 400
+
+        # Ejecutar la consulta con los parámetros
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+        connection.close()
+
+        if rows:
+            pacientes = []
+            for row in rows:
+                paciente = {
+                    'ID_Paciente': row[0],
+                    'Nombre': row[1],
+                    'Apellido_Paterno': row[2],
+                    'Apellido_Materno': row[3],
+                    'DNI': row[4],
+                    'Genero': row[5],
+                    'Direccion': row[6],
+                    'Edad': row[7],
+                    'Celular': row[8],
+                    'Fecha_Nacimiento': str(row[9])
+                }
+                pacientes.append(paciente)
+            return jsonify(pacientes), 200
+        else:
+            return jsonify({'error': 'Paciente(s) no encontrado(s)'}), 404
+    else:
+        return jsonify({"error": "Conexión fallida"}), 500

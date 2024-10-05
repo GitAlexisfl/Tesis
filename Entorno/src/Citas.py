@@ -75,7 +75,7 @@ def ver_citas():
 @appC.route('/citas/agendar', methods=['POST'])
 def agendar_cita():
         data = request.json
-
+        
         # Verificación de que los datos requeridos existen
         required_fields = ['DNI', 'Fecha_Cita', 'Hora_Cita', 'Descripcion']
         for field in required_fields:
@@ -95,6 +95,15 @@ def agendar_cita():
 
             if paciente:
                 id_paciente = paciente[0]
+
+                # Verificar si ya existe una cita para este paciente en la misma fecha
+                cursor.execute("""
+                    SELECT ID_Cita FROM Citas WHERE ID_Paciente = ? AND Fecha_Cita = ?
+                """, (id_paciente, data['Fecha_Cita']))
+                cita_existente = cursor.fetchone()
+                if cita_existente:
+                    return jsonify({'error': 'El paciente ya tiene una cita para este día.'}), 400
+
                 # Si el paciente existe, se agrega la cita
                 cursor.execute("""
                     INSERT INTO Citas (ID_Paciente, Fecha_Cita, Hora_Cita, Descripcion)
