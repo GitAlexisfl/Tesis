@@ -177,3 +177,42 @@ def buscar_paciente_nd():
             return jsonify({'error': 'Paciente(s) no encontrado(s)'}), 404
     else:
         return jsonify({"error": "Conexión fallida"}), 500
+    
+@appP.route('/pacientes/actualizar/<int:id_paciente>', methods=['PUT'])
+def actualizar_paciente(id_paciente):
+    data = request.json  # Obtener los datos enviados en el cuerpo de la solicitud
+
+    # Verificación de que los campos requeridos están presentes en la solicitud
+    required_fields = ['Nombre', 'Apellido_Paterno', 'Apellido_Materno', 'DNI', 'Genero', 'Direccion', 'Edad', 'Celular', 'Fecha_Nacimiento']
+    for field in required_fields:
+        if field not in data:
+            return jsonify({"error": f"Falta el campo requerido: {field}"}), 400
+
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor()
+
+        # Actualizar los datos del paciente en la base de datos
+        cursor.execute("""
+            UPDATE Pacientes 
+            SET Nombre = ?, Apellido_Paterno = ?, Apellido_Materno = ?, DNI = ?, Genero = ?, Direccion = ?, Edad = ?, Celular = ?, Fecha_Nacimiento = ?
+            WHERE ID_Paciente = ?
+        """, (
+            data['Nombre'], 
+            data['Apellido_Paterno'], 
+            data['Apellido_Materno'], 
+            data['DNI'], 
+            data['Genero'], 
+            data['Direccion'], 
+            data['Edad'], 
+            data['Celular'], 
+            data['Fecha_Nacimiento'], 
+            id_paciente
+        ))
+
+        connection.commit()  # Confirmar los cambios en la base de datos
+        return jsonify({"success": "Paciente actualizado exitosamente"}), 200
+    except Exception as ex:
+        return jsonify({"error": str(ex)}), 500
+    finally:
+        connection.close()
