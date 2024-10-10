@@ -20,9 +20,9 @@
                 <a href="gestion_citas.html">Programar Citas</a>            
                 <a href="Citas_del_dia.html" class="active">Mostrar Citas</a>
                 <a href="modulo_reportes.html">Módulo de Reportes</a>     
-                <a href="index.html" >Registrar paciente</a>
-                <a href="list.html">Historial de Pacientes</a>
-                <a href="Busqueda dni.html">Buscar datos</a>
+                <!-- <a href="index.html">Registrar paciente</a> -->
+                <a href="Lista de Pacientes.html">Historial de Pacientes</a>
+                <a href="Agregar Paciente.html">Registrar Paciente</a>
         </div>
     </div>
     <!-- Contenido -->
@@ -43,43 +43,13 @@
                         <th>Apellido Materno</th>
                         <th>Fecha_Cita</th>
                         <th>Hora_Cita</th>
-                        <th>Descripcion</th>                        
+                        <th>Descripcion</th>
+                        <th>Cancelar</th>                
                     </tr>
                 </thead>
                 <tbody id="Citas">
                     <!-- Aquí se añadirán dinámicamente los datos -->                    
-                    <tr>
-                        <td>Juan</td>
-                        <td>Pérez</td>
-                        <td>González</td>
-                        <td>12/03/2024</td>
-                        <td>7:30</td>
-                        <td>Siempre Viva </td>
-                    </tr> 
-                    <tr>
-                        <td>Juan</td>
-                        <td>Pérez</td>
-                        <td>González</td>
-                        <td>12/03/2024</td>
-                        <td>7:30</td>
-                        <td>Siempre Viva </td>
-                    </tr> 
-                    <tr>
-                        <td>Juan</td>
-                        <td>Pérez</td>
-                        <td>González</td>
-                        <td>12/03/2024</td>
-                        <td>7:30</td>
-                        <td>Siempre Viva </td>
-                    </tr> 
-                    <tr>
-                        <td>Juan</td>
-                        <td>Pérez</td>
-                        <td>González</td>
-                        <td>12/03/2024</td>
-                        <td>7:30</td>
-                        <td>Siempre Viva </td>
-                    </tr> 
+                   
                 </tbody>
             </table>
         </main>        
@@ -109,6 +79,7 @@
                                 <td>${cita.Fecha_Cita}</td>
                                 <td>${cita.Hora_Cita}</td>
                                 <td>${cita.Descripcion}</td>
+                                <td><button onclick="cancelarCita(${cita.ID_Cita})">Cancelar</button></td>
                             `;
                             tableBody.appendChild(row);
                         });
@@ -116,8 +87,25 @@
                         tableBody.innerHTML = '<tr><td colspan="7">No hay citas para la fecha seleccionada</td></tr>';
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error('Error:', error));                
         });
+
+        // Función para cancelar una cita
+        function cancelarCita(idCita) {
+            fetch(`http://127.0.0.1:5000/citas/cancelar/${idCita}`, {
+                method: 'PUT'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    location.reload();  // Refrescar la página después de cancelar la cita
+                } else {
+                    alert(data.error || 'Error al cancelar la cita');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
 
         // Poner la fecha actual como valor predeterminado
         window.onload = function() {

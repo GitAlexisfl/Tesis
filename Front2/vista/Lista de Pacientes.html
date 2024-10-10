@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Pacientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Front2/static/style/listar.css">
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="sidebar">
+            <h2>Panel de Control</h2>
+                <a href="main.html">Inicio</a>
+                <a href="modulo_resumen_general.html">Resumen General</a>
+                <a href="gestion_citas.html">Programar Citas</a>            
+                <a href="Citas_del_dia.html">Mostrar Citas</a>
+                <a href="modulo_reportes.html">Módulo de Reportes</a>     
+                <!-- <a href="index.html">Registrar paciente</a> -->
+                <a href="Lista de Pacientes.html" class="active">Historial de Pacientes</a>
+                <a href="Agregar Paciente.html">Registrar Paciente</a>
+        </div>
+
+        <div class="main-content">
+            <h1>Pacientes Registrados</h1>
+
+            <label for="busqueda">Buscar Paciente:</label>
+            <input type="text" id="busqueda" name="busqueda" class="form-control" placeholder="Ingrese el DNI o Nombre"
+            required>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombres</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>DNI</th>
+                        <th>Género</th>
+                        <th>Dirección</th>
+                        <th>Edad</th>
+                        <th>Celular</th>
+                        <th>Fecha de Nacimiento</th>
+                    </tr>
+                </thead>
+                <tbody id="Pacientes">
+                    <!-- Aquí se añadirán dinámicamente los datos -->                   
+                    
+                </tbody>
+            </table>
+        </div>        
+    </div>
+
+    <script>
+        
+    document.addEventListener('DOMContentLoaded', function () {
+    // Función para cargar todos los pacientes al cargar la página
+    function cargarTodosPacientes() {
+        fetch('http://127.0.0.1:5000/pacientes')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('Pacientes');
+                tableBody.innerHTML = '';  // Limpiar el contenido existente
+                data.forEach(paciente => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${paciente.ID_Paciente}</td>
+                        <td>${paciente.Nombre}</td>
+                        <td>${paciente.Apellido_Paterno}</td>
+                        <td>${paciente.Apellido_Materno}</td>
+                        <td>${paciente.DNI}</td>
+                        <td>${paciente.Genero}</td>
+                        <td>${paciente.Direccion}</td>
+                        <td>${paciente.Edad}</td>
+                        <td>${paciente.Celular}</td>
+                        <td>${paciente.Fecha_Nacimiento}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error al cargar todos los pacientes:', error));
+    }
+
+        // Llamar a la función para cargar los pacientes al iniciar
+        cargarTodosPacientes();
+
+        // Escuchar el input de búsqueda
+        document.getElementById('busqueda').addEventListener('input', function () {
+            const busqueda = document.getElementById('busqueda').value.trim();
+
+            // Si el campo de búsqueda está vacío, mostrar todos los pacientes
+            if (busqueda === "") {
+                cargarTodosPacientes();
+                return;
+            }
+
+            // Si hay un valor en el campo de búsqueda, hacer la solicitud de búsqueda
+            fetch('http://127.0.0.1:5000/pacientes/buscarND', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    busqueda: busqueda,   // Enviar lo que se ha escrito, puede ser DNI o Nombre
+                }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la búsqueda');
+                }
+                return response.json();
+            })
+            .then(data => {
+                    const tableBody = document.getElementById('Pacientes');
+                    tableBody.innerHTML = '';  // Limpiar el contenido existente
+
+                    if (Array.isArray(data)) {
+                        data.forEach(paciente => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${paciente.ID_Paciente}</td>
+                                <td>${paciente.Nombre}</td>
+                                <td>${paciente.Apellido_Paterno}</td>
+                                <td>${paciente.Apellido_Materno}</td>
+                                <td>${paciente.DNI}</td>
+                                <td>${paciente.Genero}</td>
+                                <td>${paciente.Direccion}</td>
+                                <td>${paciente.Edad}</td>
+                                <td>${paciente.Celular}</td>
+                                <td>${paciente.Fecha_Nacimiento}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    } else if (data.error) {
+                        alert(data.error);
+                    }
+            })
+            .catch(error => {
+                console.error('Error al buscar el paciente:', error);
+                alert('Error al buscar el paciente');
+            });
+        });
+    });
+
+
+
+    </script>
+</body>
+
+</html>

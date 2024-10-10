@@ -131,9 +131,9 @@
                 <li><a href="gestion_citas.html">Gestión de Citas</a></li>
                 <li><a href="historial_pacientes.html">Historial de Pacientes</a></li> 
                 <li><a href="modulo_reportes.html">Módulo de Reportes</a></li>
-                <li><a href="index.html">Registrar paciente</a></li>
-                <li><a href="list.html">Pacientes registrados</a></li>
-                <li><a href="Busqueda dni.html" class="active">Buscar datos</a></li>
+                <!-- <li><a href="index.html">Registrar paciente</a></li>-->
+                <li><a href="Lista de Pacientes.html">Pacientes registrados</a></li>
+                <li><a href="Agregar Paciente.html" class="active">Registrar Paciente</a></li>
             </ul>
         </nav>
     </div>
@@ -242,6 +242,8 @@
                 .catch(error => console.error('Error:', error));
         });
 
+
+
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('patient-form').addEventListener('submit', function (event) {
                 event.preventDefault(); // Evitar que la página se recargue
@@ -275,6 +277,57 @@
                     });
             });
         });
+
+
+        
+            // Llamar a la API de Flask para obtener las citas
+            fetch('http://127.0.0.1:5000/citas/ver')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('Citas');
+                    tableBody.innerHTML = '';  // Limpiar el contenido existente
+                    data.forEach(cita => {
+                        if (cita.Estado_Cita !== 'Cancelado') {  // No mostrar las citas canceladas
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${cita.ID_Cita}</td>
+                                <td>${cita.Nombre}</td>
+                                <td>${cita.Apellido_Paterno}</td>
+                                <td>${cita.Apellido_Materno}</td>
+                                <td>${cita.Fecha_Cita}</td>
+                                <td>${cita.Hora_Cita}</td>
+                                <td>${cita.Descripcion}</td>
+                                <td><button onclick="cancelarCita(${cita.ID_Cita})">Cancelar</button></td>
+                            `;
+                            tableBody.appendChild(row);
+                        }
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+
+            // Función para cancelar una cita
+            function cancelarCita(idCita) {
+                fetch(`http://127.0.0.1:5000/citas/cancelar/${idCita}`, {
+                    method: 'PUT'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                        location.reload();  // Refrescar la página después de cancelar la cita
+                    } else {
+                        alert(data.error || 'Error al cancelar la cita');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+
+
+
+
+
+
+
     </script>
 
 </body>

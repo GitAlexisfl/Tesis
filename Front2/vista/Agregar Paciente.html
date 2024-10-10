@@ -19,9 +19,9 @@
                 <a href="gestion_citas.html">Programar Citas</a>            
                 <a href="Citas_del_dia.html">Mostrar Citas</a>
                 <a href="modulo_reportes.html">Módulo de Reportes</a>     
-                <a href="index.html">Registrar paciente</a>
-                <a href="list.html">Historial de Pacientes</a>
-                <a href="Busqueda dni.html" class="active">Buscar datos</a>
+                <!-- <a href="index.html">Registrar paciente</a> -->
+                <a href="Lista de Pacientes.html">Historial de Pacientes</a>
+                <a href="Agregar Paciente.html" class="active">Registrar Paciente</a>
         </div>
     </div>
     <!-- Contenido -->
@@ -49,7 +49,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nombres">Nombres:</label>
-                        <input type="text" id="nombres" name="nombres" placeholder="Nombres">
+                        <input type="text" id="nombre" name="nombres" placeholder="Nombres">
                     </div>
                     <div class="form-group">
                         <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
@@ -96,28 +96,7 @@
                     <button type="submit" class="btn-guardar">Guardar</button>
                 </div>
             </form>
-            
-
-            <!-- <div id="results" class="mt-4">
-                <h2 class="text-center">Resultados</h2>
-                <table class="table table-striped table-bordered mt-3">
-                    <thead>
-                        <tr>
-                            <th>Nombres</th>
-                            <th>Apellido Paterno</th>
-                            <th>Apellido Materno</th>
-                            <th>Tipo de Documento</th>
-                            <th>Número de Documento</th>
-                            <th>Dígito Verificador</th>
-                        </tr>
-                    </thead>
-                    <tbody id="Pacientes">
-                         Los resultados se agregarán aquí dinámicamente 
-                    </tbody>
-                </table>
-            </div> -->
-            
-
+                      
         </main>      
         
     </div></div>
@@ -146,31 +125,15 @@
                     }
                 })
                 .then(data => {
-                    // console.log(data)
-                    // const tableBody = document.getElementById('Pacientes');
-                    // tableBody.innerHTML = '';
+                   
 
                     if (data.error) {
                         console.error(data.error);
-                    } else {
-                        // const row = document.createElement('tr');
-                        // row.innerHTML = `
-                        // <td>${data.nombres}</td>
-                        // <td>${data.apellidoPaterno}</td>
-                        // <td>${data.apellidoMaterno}</td>
-                        // <td>${data.tipoDocumento}</td>
-                        // <td>${data.numeroDocumento}</td>
-                        // <td>${data.digitoVerificador}</td>
-                        // `;
-                        // tableBody.appendChild(row);
-
-
-                        document.getElementById('nombres').value = data.nombres;
+                    } else {                               
+                        document.getElementById('nombre').value = data.nombres;
                         document.getElementById('apellidoPaterno').value = data.apellidoPaterno;
                         document.getElementById('apellidoMaterno').value = data.apellidoMaterno;
                         document.getElementById('numeroDocumento').value = data.numeroDocumento;
-                        //document.getElementById('tipoDocumento').value = data.tipoDocumento;                        
-                        //document.getElementById('digitoVerificador').value = data.digitoVerificador;
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -184,15 +147,15 @@
 
                 // Recoger los datos del formulario
                 const pacienteData = {
-                    Nombres: document.getElementById('nombres').value,
-                    ApellidoPaterno: document.getElementById('apellidoPaterno').value,
-                    ApellidoMaterno: document.getElementById('apellidoMaterno').value,
+                    Nombre: document.getElementById('nombre').value,
+                    Apellido_Paterno: document.getElementById('apellidoPaterno').value,
+                    Apellido_Materno: document.getElementById('apellidoMaterno').value,
                     DNI: document.getElementById('numeroDocumento').value,
                     Genero: document.getElementById('genero').value,
                     Direccion: document.getElementById('direccion').value,
                     Edad: document.getElementById('edad').value,
                     Celular: document.getElementById('celular').value,
-                    FechaNacimiento: document.getElementById('fecha-nacimiento').value
+                    Fecha_Nacimiento: document.getElementById('fecha-nacimiento').value
                 };
 
                 // Enviar los datos mediante POST a la API
