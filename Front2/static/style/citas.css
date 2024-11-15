@@ -95,7 +95,7 @@ input {
     border-radius: 5px; /* Bordes redondeados */
 }
 
-button {
+#buscar-citas {
     width: 20%; /* Ocupa todo el ancho del contenedor */
     padding: 10px 20px;
     border: none;
@@ -133,5 +133,21 @@ table th, table td {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+}
+
+
+table td button {
+    display: inline-block; /* Cambia a inline-block para evitar desbordes */
+    width: 100%; /* Ocupa todo el ancho de la celda */
+    height: 100%; /* Ocupa toda la altura de la celda */
+    padding: 8px 0; /* Ajusta el padding si es necesario */
+    font-size: 14px;
+    background-color: #045381;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
 }
 
