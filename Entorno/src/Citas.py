@@ -32,16 +32,16 @@ def get_citas():
         return jsonify({"error": "Conexión fallida"}), 500
         
 
-# View appointments for a specific date
+# Vista desde una fecha en especifico
 
 @appC.route('/citas/ver', methods=['GET'])
 def ver_citas():
-    fecha_cita = request.args.get('fecha')  # Obtain the date from the request (format: YYYY-MM-DD)
+    fecha_cita = request.args.get('fecha')  
 
     connection = get_db_connection()
     if connection:
         cursor = connection.cursor()
-        # Query to get all appointments for the given date
+        # Query 
         cursor.execute("""
             SELECT c.ID_Cita, p.Nombre, p.Apellido_Paterno, p.Apellido_Materno, c.Fecha_Cita, c.Hora_Cita, c.Descripcion
             FROM Citas c
