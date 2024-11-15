@@ -46,7 +46,7 @@ def ver_citas():
             SELECT c.ID_Cita, p.Nombre, p.Apellido_Paterno, p.Apellido_Materno, c.Fecha_Cita, c.Hora_Cita, c.Descripcion
             FROM Citas c
             JOIN Pacientes p ON c.ID_Paciente = p.ID_Paciente
-            WHERE c.Fecha_Cita = ?
+            WHERE c.Fecha_Cita = ? AND c.Estado_Cita != 'Cancelado'
         """, fecha_cita)
         rows = cursor.fetchall()
         connection.close()
