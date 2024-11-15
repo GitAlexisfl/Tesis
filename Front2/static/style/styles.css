@@ -1,6 +1,8 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f7f9fc;
+    margin: 0; /* Elimina márgenes predeterminados */
+    display: flex; /* Cambia a flexbox para facilitar el ajuste responsivo */
 }
 
 .sidebar {
@@ -8,11 +10,11 @@ body {
     background-color: #007BFF;
     padding: 20px;
     color: white;
-    width: 250px;    
+    width: 250px;
     position: fixed;
 }
 
-.sidebar h2{
+.sidebar h2 {
     text-align: center;
     margin-bottom: 40px;
 }
@@ -23,6 +25,7 @@ body {
     display: block;
     padding: 15px;
     font-weight: 600;
+    transition: background-color 0.3s; 
 }
 
 .sidebar a:hover {
@@ -39,26 +42,31 @@ body {
 
 /* Estilo para el contenedor principal */
 .main-content {
+    position: absolute; 
     margin-left: 250px; /* Asegúrate de que esto coincida con el ancho del sidebar */
     padding: 20px; /* Ajusta el padding si es necesario */
     background-color: #ffffff;
     width: calc(100% - 250px); /* Toma el espacio restante después del sidebar */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    box-sizing: border-box; /*  padding y border en el tamaño total */
-    min-height: 100vh; /*  ocupa todo el alto disponible */
+    box-sizing: border-box; /* padding y border en el tamaño total */
+    min-height: 100vh; /* ocupa todo el alto disponible */
 }
 
-h1{
-    position: relative;
-    left:190px;
+h1 {
     margin-bottom: 50px;
+    position: absolute;
+    left: 19%;
 }
 
 /* Estilo del formulario */
 .patient-form {
     display: flex;
     flex-direction: column;
+    position: absolute;
+    top: 100px;
+    left: 19%;
+    width: 50%;
 }
 
 /* Estilo de los labels */
@@ -67,15 +75,13 @@ h1{
     margin: 10px 0 5px;
     font-family: 'Poppins', sans-serif;
     color: #555;
-    position: relative;
-    left:190px;
 }
 
 /* Estilo de los inputs */
 .patient-form input[type="text"],
 .patient-form input[type="date"],
 .patient-form input[type="number"] {
-    width: 80%;
+    width: 100%; /* Asegúrate de que se ajuste en pantallas más pequeñas */
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -84,8 +90,6 @@ h1{
     font-family: 'Poppins', sans-serif;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    position: relative;
-    left:190px;
 }
 
 .patient-form input[type="text"]:focus,
@@ -101,6 +105,10 @@ h1{
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    position: absolute;
+    top: 100%;
+    left: 45%;
+    width: 100%;
 }
 
 button {
@@ -114,19 +122,80 @@ button {
     transition: background-color 0.3s ease;
 }
 
-
-
 /* Botón de guardar */
 .btn-guardar {
     background-color: #007BFF;
     color: white;
-    position: relative;
-    left: 40%;
 }
 
 .btn-guardar:hover {
     background-color: #0056b3;
 }
 
+/* Estilos del pop-up */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
 
+/* Mostrar el pop-up cuando se hace clic */
+#mensaje:target .popup {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#cerrar {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#cerrar:hover {
+    background-color: #c82333;
+}
+
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* El sidebar ocupa todo el ancho */
+        position: relative; /* Permite que se desplace con el contenido */
+        height: auto; /* Ajusta la altura automáticamente */
+    }
+    
+    .main-content {
+        margin-left: 0; /* Elimina el margen izquierdo en pantallas pequeñas */
+        width: 100%; /* Asegura que el contenido principal ocupe todo el ancho */
+        padding: 10px; /* Ajusta el padding si es necesario para pantallas más pequeñas */
+    }
+
+    .btn {
+        width: 100%; /* Los botones ocupan todo el ancho */
+        left: 0; /* Elimina el desplazamiento */
+        margin-bottom: 10px; /* Espacio entre botones */
+    }
+}
 

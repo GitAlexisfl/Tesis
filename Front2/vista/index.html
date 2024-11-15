@@ -50,6 +50,7 @@
 
                 <div class="buttons">
                     <!--<button type="submit" class="btn-actualizar">Actualizar</button>-->
+                    <!--<a href="#mensaje"><button>Registrar Paciente</button></a>-->
                     <button type="submit" class="btn-guardar">Guardar</button>
                 </div>
             </form>        
@@ -83,7 +84,15 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert("Paciente agregado exitosamente.");
+                            /*alert("Paciente agregado exitosamente.");*/
+                            <div id="mensaje">
+                                <div class="popup">
+                                    <div class="popup-content">
+                                        <p>¡Paciente registrado exitosamente!</p>
+                                        <a id="cerrar" href="#">Cerrar</a>
+                                    </div>
+                                </div>
+                            </div>
                         } else {
                             alert("Error: " + data.error);
                         }
